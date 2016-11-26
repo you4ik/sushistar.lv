@@ -390,6 +390,30 @@ $(function(){
 	} )
 });
 
+
+/* Аяксовое удаление товаров в корзине */
+function ajax_remove(variant_id) {
+    var coupon_code = $('input[name="coupon_code"]').val(),
+        delivery_id = $('input[name="delivery_id"]:checked').val(),
+        payment_id = $('input[name="payment_method_id"]:checked').val();
+	/* ajax запрос */
+    $.ajax({
+        url: 'ajax/cart_ajax.php',
+        data: {
+            coupon_code: coupon_code,
+            action: 'remove_citem',
+            variant_id: variant_id
+        },
+        dataType: 'json',
+        success: function (data) {
+            //var scrollToItem = index*100;
+            $('a#cart_del').find('span[data-index="' + item_id + '"]').addClass('basket_remove_animate');
+            console.log(data);
+        }
+    });
+}
+
+
 /* Обновление блоков: cart_informer, cart_purchases, cart_deliveries */
 function ajax_set_result(data) {
 	$( '#cart_informer' ).html( data.cart_informer );
@@ -519,32 +543,7 @@ function change_payment_method($id) {
 	$( '#deliveries_' + $id ).parent().addClass( 'active' );
 }
 
-/* Аяксовое удаление товаров в корзине */
-function ajax_remove(variant_id) {
-	var coupon_code = $('input[name="coupon_code"]').val(),
-		delivery_id = $('input[name="delivery_id"]:checked').val(),
-		payment_id = $('input[name="payment_method_id"]:checked').val();
-	/* ajax запрос */
-	$.ajax( {
-		url: 'ajax/cart_ajax.php',
-		data: {
-			coupon_code: coupon_code,
-			action: 'remove_citem',
-			variant_id: variant_id
-		},
-		dataType: 'json',
-		success: function(data) {
-			if( data.result == 1 ) {
-				ajax_set_result( data );
-				$( '#deliveries_' + delivery_id ).trigger( 'click' );
-				$( '#payment_' + delivery_id + '_' + payment_id ).trigger( 'click' );
-			} else {
-				$( '#cart_informer' ).html( data.cart_informer );
-				$( '#fn-content' ).html( data.content );
-			}
-		}
-	} );
-}
+
 
 /* Формирование ровных строчек для характеристик */
 function resize_comparison() {
@@ -660,3 +659,7 @@ $('.card .fn-variant').focus(function() {
 $('.card .fn-variant').blur(function() {
     $(this).parents('.card').removeClass('hover');
 });
+
+
+
+

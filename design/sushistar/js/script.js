@@ -5,7 +5,6 @@ function calculateRow(){
 }
 
 
-
 function registerProductListeners(){
 	//alert('Product listeners attached');
 	$('.txt_col_tov').attr('readonly','readonly');
@@ -82,58 +81,27 @@ function registerProductListeners(){
         addToBasket(product);
     });
     $('.'+tovar_class+' .minus_tov').off().on('click',function(e){
-        var product = $(this).closest('.'+tovar_class);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        var product = $(this).closest('.' + tovar_class);
         changeProdutValue(product,'decrease');
         e.preventDefault();
     });
 
     $('.'+tovar_class+' .plus_tov').off().on('click',function(e){
-        var product = $(this).closest('.'+tovar_class);;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        var product = $(this).closest('.' + tovar_class);
         changeProdutValue(product,'increase');
         e.preventDefault();
     });
-	$('.like').off().on('click',function(){
-		var link = $(this);
-		$.ajax({
-            type: 'POST',
-            url: '/bdhandlers/likes_bd.php',
-            dataType: 'json',
-            data: {item_id: $(this).closest('.'+tovar_class).data('id')},
-            success: function (data) {
-	            if(data.user_like==0){
-		            $(link).addClass('you_not_like_bitch');
-	            }else{ 
-		            $(link).removeClass('you_not_like_bitch');
-	            }
-	            if(parseInt(data.total)>0){
-	            	$(link).removeClass('likes_disabled').find('span').text(data.total);
-	            }else{
-		            $(link).addClass('likes_disabled').find('span').html('');
-	            }
-            }
-        });
-        return false;
-	});
+
 	$('.tovar_cost').each(function(i,item){ 
 		$(item).find('.balloon').remove();
 		$(item).append("<img class='balloon' src='/design/sushistar/img/balloon.png' style='display:none;'>");
 	});
 }
-function sticky_relocate() {
-    var window_top = $(window).scrollTop();
-    var div_top = $('.togmenu').offset().top;
-    if (window_top > div_top) {
-        $('.poplavok').addClass('stick');
-    } else {
-        $('.poplavok').removeClass('stick');
-    }
-}
+
 $(document).ready(function(){
-	
-	$(window).scroll(sticky_relocate);
-    sticky_relocate();
-	
-setTimeout(registerProductListeners,1000);
+
+
+    setTimeout(registerProductListeners,1000);
 	$(document).on('click', function (e) {
 	    if ($(e.target).closest(".tovar_zoom").length === 0 && $(e.target).closest(".pic").length === 0 && $('.tovar_zoom.animate').is(':visible')) {
 	        var zoom = $('.tovar_zoom.animate');
@@ -260,6 +228,15 @@ setTimeout(registerProductListeners,1000);
 	$('.togmenu .close').click(function(e){
 		$('.togmenu').slideToggle();
 		e.preventDefault();
-	});	 
-		
+    });
+
+});
+
+$.ajax({
+    type: 'GET',
+    url: '/ajax/misc.php?show=cart_total_price',
+    dataType: 'text',
+    success: function (data) {
+        $('#cart_total_price').text(data);
+    }
 });

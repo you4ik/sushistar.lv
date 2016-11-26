@@ -131,18 +131,20 @@
     {/if}
 
     {* Стили *}
-	<link href="dhttps://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-	<link href="design/{$settings->theme|escape}/css/style.css" type="text/css" data-template-style="true" rel="stylesheet">
+	<link href="/design/{$settings->theme|escape}/css/style.css" type="text/css" data-template-style="true"
+		  rel="stylesheet">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="design/{$settings->theme|escape}/js/jquery.animateNumber.min.js"></script>
+	<script src="/design/{$settings->theme|escape}/js/jquery.animateNumber.min.js"></script>
+	<script src="/design/{$settings->theme}/js/jquery.tinyscrollbar.js"></script>
 
     {* Okay *}
     {include file="scripts.tpl"}
-	<script src="design/{$settings->theme}/js/script.js"></script>
-	<script src="design/{$settings->theme}/js/okay.js"></script>
-	<script src="design/{$settings->theme}/js/my.js"></script>
-	<script src="design/{$settings->theme}/js/baloon.js"></script>
-	<script src="design/{$settings->theme}/js/owl.carousel.min.js"></script>
+	<script src="/design/{$settings->theme}/js/script.js"></script>
+	<script src="/design/{$settings->theme}/js/basket.js"></script>
+	<script src="/design/{$settings->theme}/js/okay.js"></script>
+	<script src="/design/{$settings->theme}/js/baloon.js"></script>
+	<script src="/design/{$settings->theme}/js/owl.carousel.min.js"></script>
+
 
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<link rel="stylesheet" type="text/css" href="http://delivery.bdvision.ru/bitrix/templates/bd_sushi_shop_default/vendor/owl-carousel/owl.carousel.css">
@@ -150,7 +152,40 @@
 </head>
 
 <body>
+<div class="wrap basket_wrapper ">
 
+
+	<div class="cart_popup animate_in" id="cart" style="display:none;;top: 846px;">
+
+	</div>
+
+	<div class="panda_popup" id="thank" style="display: none; top: 846px;">
+		<span class="close"></span>
+		<div class="inf">
+			<div class="title">Спасибо!</div>
+			<p>За заказ, наш оператор свяжется с вами для уточнения деталей.</p>
+		</div>
+		<div class="panda"></div>
+	</div><!-- #thank -->
+	<div class="panda_popup" id="paid" style="display: none; top: 846px;">
+		<span class="close"></span>
+		<div class="inf">
+			<div class="title">Заказ оплачен!</div>
+			<p>Спасибо, скоро с вами свяжется наш оператор.</p>
+		</div>
+		<div class="panda"></div>
+	</div><!-- #paid -->
+	<div class="panda_popup" id="error" style="display: none; top: 846px;">
+		<span class="close"></span>
+		<div class="inf">
+			<div class="title">Заказ не оплачен</div>
+			<p>Возможно произошла ошибка, попробуйте оплатить позже.</p>
+		</div>
+		<div class="panda"></div>
+	</div><!-- #error -->
+
+
+</div>
 <div class="wrapper">
 	<header class="header ">
 		<div class="wrap top_wrap">
@@ -158,9 +193,9 @@
 			<div id="cart_informer" class="col-xs-6 col-lg-2 pull-lg-right">
                 {include file='cart_informer.tpl'}
 			</div>
-			<span class="logo">Sushi Star <span>Riga</span></span>            <a href="#" class="cart_btn cart_full">
+			<span class="logo">Sushi Star <span>Riga</span></span> <a href="/#" class="cart_btn cart_full">
 
-				<span>400</span>
+				<span></span>
 				<i class="rouble rouble_padding">i</i>
 			</a>
 			<div class="head_center">

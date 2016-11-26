@@ -69,14 +69,13 @@
         $deliveries = $okay->delivery->get_deliveries(array('enabled'=>1));
     	$okay->design->assign('deliveries', $deliveries);
         foreach($deliveries as $delivery) {
+            $i++;
             $delivery->payment_methods = $okay->payment->get_payment_methods(array('delivery_id'=>$delivery->id, 'enabled'=>1));
         }
         $okay->design->assign('all_currencies', $okay->money->get_currencies());
-        if($okay->coupons->count_coupons(array('valid'=>1))>0) {
-            $okay->design->assign('coupon_request', true);
-        }
-    	
-    	$result = array('result'=>1);
+
+
+        $result = array('result'=>1);
         $result['cart_informer'] = $okay->design->fetch('cart_informer.tpl');
         $result['cart_purchases'] = $okay->design->fetch('cart_purchases.tpl');
         $result['cart_deliveries'] = $okay->design->fetch('cart_deliveries.tpl');

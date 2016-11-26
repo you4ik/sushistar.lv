@@ -1108,7 +1108,7 @@ body {
 			display:inline-block;
 			}
 			.footer .social li a {
-				background:url(images/soc.png) no-repeat scroll;
+				background: url(/design/sushistar/img/soc.png) no-repeat scroll;
 				width:19px;
 				height:19px;
 				display:block;
@@ -1715,7 +1715,7 @@ body {
 		position:relative;
 	}
 	#scrollbar1 .thumb {
-		background:url(images/thumb.png) no-repeat scroll;
+		background: url(/design/sushistar/img/thumb.png) no-repeat scroll;
 		height:44px;
 		width:11px;
 		cursor:pointer;
