@@ -72,7 +72,7 @@
         <div class="down">
             <form class="fn-variants okaycms" action="/{$lang_link}cart">
                 {* Варианты товара *}
-                <select name="variant" class="fn-variant okaycms form-control c-select{if $product->variants|count < 2} hidden-xs-up{/if}">
+                <select name="variant" class="fn-variant okaycms form-control c-select hidden">
                     {foreach $product->variants as $v}
                         <option value="{$v->id}" data-price="{$v->price|convert}" data-stock="{$v->stock}"{if $v->compare_price > 0} data-cprice="{$v->compare_price|convert}"{/if}{if $v->sku} data-sku="{$v->sku}"{/if}>{if $v->name}{$v->name}{else}{$product->name|escape}{/if}</option>
                     {/foreach}

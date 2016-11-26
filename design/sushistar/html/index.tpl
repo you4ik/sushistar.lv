@@ -144,13 +144,6 @@
 	<script src="design/{$settings->theme}/js/baloon.js"></script>
 	<script src="design/{$settings->theme}/js/owl.carousel.min.js"></script>
 
-    {* Всплывающие подсказки для администратора *}
-    {if $smarty.session.admin}
-		<script src ="backend/design/js/admintooltip/admintooltip.js"></script>
-		<link href="backend/design/js/admintooltip/styles/admin.css" rel="stylesheet"/>
-    {/if}
-
-
 	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<link rel="stylesheet" type="text/css" href="http://delivery.bdvision.ru/bitrix/templates/bd_sushi_shop_default/vendor/owl-carousel/owl.carousel.css">
 	<link rel="stylesheet" type="text/css" href="http://delivery.bdvision.ru/bitrix/templates/bd_sushi_shop_default/animate.css">
