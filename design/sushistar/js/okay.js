@@ -1,7 +1,6 @@
 /* Начальное кол-во для смены в карточке и корзине */
 okay.amount = 1;
 
-
 /* Аяксовая корзина */
 $(document).on('submit', '.fn-variants.okaycms', function(e) {
 	e.preventDefault();
@@ -374,12 +373,6 @@ $(function(){
 		}
 	} );
 
-	/* Если мы в подкатегории разворачивать категории родителей */
-	if( $( '.fn-collapsed' ).size() ) {
-		$( '.fn-collapsed' ).parent( '.nav-item' ).parents( '.nav-item' ).children( '.btn-catalog-collapse' ).removeClass('collapsed');
-		$( '.fn-collapsed' ).parent( '.nav-item' ).parents( '.nav-item' ).children( '.collapse' ).addClass('in');
-	}
-
 	/* Рейтинг товара */
 	$('.product_rating').rater({ postHref: 'ajax/rating.php' });
 
@@ -414,38 +407,24 @@ function ajax_remove(variant_id) {
 }
 
 
-/* Обновление блоков: cart_informer, cart_purchases, cart_deliveries */
-function ajax_set_result(data) {
-	$( '#cart_informer' ).html( data.cart_informer );
-	$( '#fn-purchases' ).html( data.cart_purchases );
-	$( '#fn-ajax_deliveries' ).html( data.cart_deliveries );
-}
+
 
 /* Аяксовое изменение кол-ва товаров в корзине */
-function ajax_change_amount(object, variant_id) {
-	var amount = $( object ).val(),
-		coupon_code = $( 'input[name="coupon_code"]' ).val(),
-		delivery_id = $( 'input[name="delivery_id"]:checked' ).val(),
-		payment_id = $( 'input[name="payment_method_id"]:checked' ).val();
+function ajax_change_amount(variant_id, amount) {
 	/* ajax запрос */
 	$.ajax( {
+        type: 'GET',
 		url: 'ajax/cart_ajax.php',
 		data: {
-			coupon_code: coupon_code,
 			action: 'update_citem',
 			variant_id: variant_id,
 			amount: amount
 		},
 		dataType: 'json',
 		success: function(data) {
-			if( data.result == 1 ) {
-				ajax_set_result( data );
-				$( '#deliveries_' + delivery_id ).trigger( 'click' );
-				$( '#payment_' + delivery_id + '_' + payment_id ).trigger( 'click' );
-			} else {
-				$( '#cart_informer' ).html( data.cart_informer );
-				$( '#fn-content' ).html( data.content );
-			}
+            console.log(data);;;;;;;;;;;;
+            get_totalprice();
+
 		}
 	} );
 }
@@ -480,7 +459,7 @@ function amount_change(input, action) {
 	okay.amount = parseInt( input.val() );
 	/* в корзине */
 	if( $('div').is('#fn-purchases') && ( (max_val != curr_val && action == 'plus' ) || ( curr_val != 1 && action == 'minus' ) ) ) {
-        ajax_change_amount( input, id );
+//        ajax_change_amount( input, id );
 	}
 }
 

@@ -231,12 +231,65 @@ $(document).ready(function(){
     });
 
 });
+function get_totalprice() {
+    $.ajax({
+        type: 'GET',
+        url: '/ajax/misc.php?show=cart_total_price',
+        dataType: 'text',
+        success: function (data) {
+            $('#cart_total_price').html(data);
+        }
+    });
 
-$.ajax({
-    type: 'GET',
-    url: '/ajax/misc.php?show=cart_total_price',
-    dataType: 'text',
-    success: function (data) {
-        $('#cart_total_price').text(data);
-    }
+}
+
+
+$(document).ready(function () {
+
+
+
+//Мену корзины
+    $('.cart_btn').on('click', function () {
+        if ($(this).hasClass('cart')) {
+            return false;
+        }
+        $('.cart_spinner').show();
+        $('#cart').html('');
+
+
+        $.ajax({
+            type: 'GET',
+            url: '/ajax/cart_ajax.php',
+            dataType: 'json',
+            data: {},
+            success: function (data) {
+                $('#cart').append(data.cart_purchases);
+
+
+                $('.cart_popup').find('.summa span').text(number_format(data.total, 0, '.', ' '));
+                $('#oform').find('.summa span').text(number_format(data.total, 0, '.', ' '));
+
+                var $scrollbar = $("#scrollbar1");
+                $scrollbar.tinyscrollbar();
+                var scrollbar__ = $scrollbar.data("plugin_tinyscrollbar");
+                //scrollbar__.update();
+                //$('.promo_value').val(data.code);
+
+
+                //registerCartListeners();
+
+                // refreshGiftNotify(data.total);
+                $('.cart_spinner').hide();
+
+            }
+        });
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        $('.cart_popup').css('top', ((scrollTop)) + 89 + 'px');
+        $('.panda_popup').css('top', ((scrollTop)) + 89 + 'px');
+        $('#cart').show();
+
+        $('#cart').removeClass('animate_out').addClass('animate_in');
+
+        return false;
+    });
 });

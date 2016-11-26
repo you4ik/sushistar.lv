@@ -139,8 +139,8 @@
 
     {* Okay *}
     {include file="scripts.tpl"}
+    <script src="/design/{$settings->theme}/js/basket.js"></script>
 	<script src="/design/{$settings->theme}/js/script.js"></script>
-	<script src="/design/{$settings->theme}/js/basket.js"></script>
 	<script src="/design/{$settings->theme}/js/okay.js"></script>
 	<script src="/design/{$settings->theme}/js/baloon.js"></script>
 	<script src="/design/{$settings->theme}/js/owl.carousel.min.js"></script>
@@ -342,7 +342,9 @@
 
 	</main><!-- .content -->
 </div><!-- .wrapper -->
+<script>
 
+</script>
 <footer class="footer">
 	<div class="wrap">
 		<div class="foot_name">Название компании (с) 2015</div>

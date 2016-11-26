@@ -25,7 +25,7 @@
 				<ul class="zakaz_list">
                     {foreach $cart->purchases as $purchase}
 						<li data-index="{$purchase->amount}" data-price="{($purchase->variant->price)|convert}"
-							data-min-total="0" data-id="{$purchase->variant->id}">
+                            data-id="{$purchase->variant->id}">
 							<div class="pic">
                                 {$image = $purchase->product->images|first}
                                 {if $image}
@@ -43,9 +43,7 @@
 																											class="txt_col_tov"
 																											readonly="readonly"
 																											data-id="{$purchase->variant->id}"
-																											name="amounts[{$purchase->variant->id}]"
 																											value="{$purchase->amount}"
-																											onblur="ajax_change_amount(this, {$purchase->variant->id});"
 																											data-max="{$purchase->variant->stock}"><input
 										type="button" value="+" class="plus_tov"></div>
 							<div class="price">
