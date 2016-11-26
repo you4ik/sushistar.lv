@@ -1,1 +1,0 @@
-ALTER TABLE `s_callbacks` ADD COLUMN `url` VARCHAR(255) NOT NULL DEFAULT '' AFTER `processed`;
