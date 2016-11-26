@@ -32,7 +32,10 @@
     }
     $okay->design->assign('lang_link', $lang_link);
     $okay->design->assign('lang', $okay->translations);
-    
+    $okay->design->assign('total_price', $cart->total_price);
+    $okay->design->assign('amount', $okay->request->get('amount', 'integer'));
+
+
     $result = $okay->design->fetch('cart_informer.tpl');
     header("Content-type: application/json; charset=UTF-8");
     header("Cache-Control: must-revalidate");

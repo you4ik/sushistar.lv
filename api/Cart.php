@@ -79,7 +79,7 @@ class Cart extends Okay {
         return $cart;
     }
     
-    public function add_item($variant_id, $amount = 1) {
+    public function add_item($variant_id, $amount) {
         // Выберем товар из базы, заодно убедившись в его существовании
         $variant = $this->variants->get_variant($variant_id);
         // Если товар существует, добавим его в корзину
